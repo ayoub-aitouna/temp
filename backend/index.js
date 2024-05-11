@@ -3,6 +3,8 @@ const { json } = require("express");
 const db = require("./models");
 const cors = require("cors");
 
+const entries = require('./route/entries')
+
 const app = express();
 const PORT = 8080;
 const RESET = false;
@@ -13,6 +15,8 @@ app.use(json());
 app.use("/api/v1/echo", (req, res) => {
     res.json({ message: "echo Back" });
 });
+
+app.use('/api/v1/entries', entries)
 
 app.use((req, res) => {
     res.status(404).json({ message: "Path not found" });

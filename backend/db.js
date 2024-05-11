@@ -1,26 +1,26 @@
 const db = {
   "development": {
-    "username": "root",
-    "password": "123456",
-    "database": "db",
-    'port': 3307,
-    "host": "127.0.0.1",
+    "username": "myuser",
+    "password": "mypassword",
+    "database": "mydb",
+    'port': 3306,
+    "host": "mysql",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "123456",
-    "database": "db",
-    "host": "127.0.0.1",
-    'port': 3307,
+    "username": "myuser",
+    "password": "mypassword",
+    "database": "mydb",
+    "host": "mysql",
+    'port': 3306,
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "123456",
-    "database": "db",
-    'port': 3307,
-    "host": "127.0.0.1",
+    "username": "myuser",
+    "password": "mypassword",
+    "database": "mydb",
+    'port': 3306,
+    "host": "mysql",
     "dialect": "mysql"
   }
 }

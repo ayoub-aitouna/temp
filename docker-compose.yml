@@ -1,0 +1,53 @@
+version: '3'
+services:
+  frontend:
+    restart: always
+    container_name: frontend
+    build:
+      context: frontend/.
+    networks:
+      - mynetwork
+    ports:
+      - "3000:3000"
+    volumes:
+      - app_volume:/usr/src/app
+    depends_on:
+      - backend
+  backend:
+    restart: always
+    container_name: backend
+    build:
+      context: .
+    networks:
+      - mynetwork
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_volume:/usr/src/app
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    networks:
+      - mynetwork
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_DATABASE=mydb
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=mypassword
+    expose:
+      - "3306"
+
+volumes:
+  app_volume:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: 'bind'
+      device: '${PWD}'
+
+networks:
+  mynetwork:
+    driver: bridge
