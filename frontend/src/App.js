@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Login from "./auth/Login";
 import EntryList from "./components/EntryList";
+import EntryForm from "./components/EntryForm";
 const router = createBrowserRouter([
   {
     path: "/auth",
@@ -15,7 +16,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <EntryList/>,
+    element: <EntryList />,
+  },
+  {
+    path: "/entry-form",
+    element: <EntryForm />,
   },
 ]);
 
