@@ -1,3 +1,3 @@
 npm i;
-sleep 8;
+sleep 1;
 node backend/index.js;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Input = ({
   type,
@@ -29,19 +28,18 @@ const Input = ({
 };
 
 const Admin = {
-  email: "Admin@gmail.com",
-  pass: "123654789",
+  email: "admin",
+  pass: "admin",
 };
 
-const Login = () => {
-  const navigate = useNavigate();
+const Login = ({ onLogin = () => {} }) => {
   const [userInput, setUserInput] = useState({ email: "", pass: "" });
   const [error, setError] = useState();
   const handleSubmit = (e) => {
     e.preventDefault();
     setError(null);
     if (userInput.email === Admin.email && userInput.pass === Admin.pass)
-      navigate("/");
+      onLogin(true);
     else setError("Invalid Login Crodentials");
   };
   return (
@@ -61,7 +59,7 @@ const Login = () => {
             }}
           >
             <Input
-              type="email"
+              type="text"
               title="Email address"
               name="email"
               value={userInput.email}

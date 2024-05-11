@@ -1,31 +1,17 @@
 import "./App.css";
-import * as React from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import React, { useState } from "react";
 import Login from "./auth/Login";
-import EntryList from "./components/EntryList";
-import EntryForm from "./components/EntryForm";
-const router = createBrowserRouter([
-  {
-    path: "/auth",
-    element: <Login />,
-  },
-  {
-    path: "/",
-    element: <EntryList />,
-  },
-  {
-    path: "/entry-form",
-    element: <EntryForm />,
-  },
-]);
-
+import Dashboard from './components/Dashboard'
 function App() {
-  return <RouterProvider router={router} />;
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  return <div>
+    {!loggedIn ? (
+      <Login onLogin={(status) => setLoggedIn(status)} />
+    ) : (
+      <Dashboard />
+    )}
+  </div>;
 }
 
 export default App;

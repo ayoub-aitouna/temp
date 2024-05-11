@@ -8,9 +8,9 @@ router.get("/", async (req, res) => {
     const results = await db.sequelize.query(
       "SELECT * FROM Entradas ORDER BY fecha_publicacion DESC"
     );
-    res.status(200).json(results);
+    res.status(200).json(results[0]);
   } catch (err) {
-    throw err;
+    return res.status(500).send(err);
   }
 });
 
@@ -19,13 +19,16 @@ router.post("/", async (req, res) => {
   const { titulo, contenido, imagen_destacada, autor, fecha_publicacion } =
     req.body;
   try {
-    const result = await db.sequelize.query(
-      "INSERT INTO Entradas (titulo, contenido, imagen_destacada, autor, fecha_publicacion) VALUES (?, ?, ?, ?, ?)",
-      [titulo, contenido, imagen_destacada, autor, fecha_publicacion]
-    );
-    res.status(201).send(`Entrada agregada con ID: ${results.insertId}`);
+    const result = await db.Entradas.create({
+      titulo,
+      contenido,
+      imagen_destacada,
+      autor,
+      fecha_publicacion,
+    });
+    return res.status(201).send(`Entrada agregada con ID: ${result.id}`);
   } catch (err) {
-    throw err;
+    return res.status(500).send(err);
   }
 });
 
@@ -36,13 +39,23 @@ router.put("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const result = await db.sequelize.query(
-      "UPDATE Entradas SET titulo = ?, contenido = ?, imagen_destacada = ?, autor = ?, fecha_publicacion = ? WHERE id = ?",
-      [titulo, contenido, imagen_destacada, autor, fecha_publicacion, id]
+    const result = await db.Entradas.update(
+      {
+        titulo,
+        contenido,
+        imagen_destacada,
+        autor,
+        fecha_publicacion,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
     );
     res.status(200).send(`Entrada con ID: ${id} actualizada`);
   } catch (err) {
-    throw err;
+    return res.status(500).send(err);
   }
 });
 
@@ -50,9 +63,11 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const reslut = await db.sequelize.query("DELETE FROM Entradas WHERE id = ?", [
-      id,
-    ]);
+    const result = await db.Entradas.destroy({
+      where: {
+        id: id,
+      },
+    });
     res.status(200).send(`Entrada eliminada con ID: ${id}`);
   } catch (error) {}
 });

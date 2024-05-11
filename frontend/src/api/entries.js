@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/v1/api";
+const API_URL = "http://localhost:8080/api/v1";
 
 export const fetchEntries = async () => {
   try {
@@ -31,7 +31,7 @@ export const updateEntry = async (entryId, updatedData) => {
     return response.data;
   } catch (error) {
     console.error("Error updating entry:", error);
-    return null;
+    return error;
   }
 };
 
