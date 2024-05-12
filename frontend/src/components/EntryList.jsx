@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchEntries, deleteEntry } from "../api/entries";
 
-const Entry = ({ entry, handleUpdate = () => {}, handleDelete = () => {} }) => {
+const Entry = ({ entry, handleUpdate = () => { }, handleDelete = () => { } }) => {
   const onDelete = async () => {
     await deleteEntry(entry.id);
     handleDelete(entry.id);
@@ -34,6 +34,10 @@ const Entry = ({ entry, handleUpdate = () => {}, handleDelete = () => {} }) => {
           <span className="absolute inset-0" />
           {entry.titulo}
         </h3>
+        <h6 className="text-lg font-semibold leading-6">
+          <span className="absolute inset-0" />
+          {entry.sub_titulo}
+        </h6>
         <p className="mt-2 line-clamp-3 text-sm leading-6 ">
           {entry.contenido}
         </p>
@@ -76,7 +80,7 @@ const Entry = ({ entry, handleUpdate = () => {}, handleDelete = () => {} }) => {
     </article>
   );
 };
-const EntryList = ({ ShowForm = () => {}, refresh }) => {
+const EntryList = ({ ShowForm = () => { }, refresh }) => {
   const [list, setList] = useState([]);
   const getEntries = async () => {
     const list = await fetchEntries();

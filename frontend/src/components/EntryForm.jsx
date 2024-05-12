@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { createEntry, updateEntry } from "../api/entries";
 
 const Input = ({
@@ -31,10 +30,11 @@ const Input = ({
 
 const EntryForm = ({
   entry = null,
-  close = () => {},
-  refreshEntries = (item) => {},
+  close = () => { },
+  refreshEntries = (item) => { },
 }) => {
   const [titulo, setTitulo] = useState(entry ? entry.titulo : "");
+  const [sub_titulo, setsub_Titulo] = useState(entry ? entry.sub_titulo : "");
   const [contenido, setContenido] = useState(entry ? entry.contenido : "");
   const [imagenDestacada, setImagenDestacada] = useState(
     entry ? entry.imagen_destacada : ""
@@ -48,6 +48,7 @@ const EntryForm = ({
     e.preventDefault();
     const newEntry = {
       titulo,
+      sub_titulo,
       contenido,
       imagen_destacada: imagenDestacada,
       autor,
@@ -87,6 +88,14 @@ const EntryForm = ({
                 name="Title"
                 value={titulo}
                 onChange={(e) => setTitulo(e.target.value)}
+                placeholder=""
+              />
+              <Input
+                type="text"
+                title="Sub Title:"
+                name="SubTitle"
+                value={sub_titulo}
+                onChange={(e) => setsub_Titulo(e.target.value)}
                 placeholder=""
               />
               <Input

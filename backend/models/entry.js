@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(255),
                 allowNull: false
             },
+            sub_titulo: {
+                type: DataTypes.STRING(255),
+                allowNull: false
+            },
             contenido: {
                 type: DataTypes.TEXT,
                 allowNull: false

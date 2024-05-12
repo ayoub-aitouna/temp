@@ -7,7 +7,7 @@ const entries = require('./route/entries')
 
 const app = express();
 const PORT = 8080;
-const RESET = false;
+const RESET = true;
 
 app.use(cors());
 app.use(json());

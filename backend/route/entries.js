@@ -16,11 +16,12 @@ router.get("/", async (req, res) => {
 
 // Crear una nueva entrada
 router.post("/", async (req, res) => {
-  const { titulo, contenido, imagen_destacada, autor, fecha_publicacion } =
+  const { titulo, sub_titulo, contenido, imagen_destacada, autor, fecha_publicacion } =
     req.body;
   try {
     const result = await db.Entradas.create({
       titulo,
+      sub_titulo,
       contenido,
       imagen_destacada,
       autor,
@@ -34,7 +35,8 @@ router.post("/", async (req, res) => {
 
 // Actualizar una entrada
 router.put("/:id", async (req, res) => {
-  const { titulo, contenido, imagen_destacada, autor, fecha_publicacion } =
+  const { titulo,
+    sub_titulo, contenido, imagen_destacada, autor, fecha_publicacion } =
     req.body;
   const { id } = req.params;
 
@@ -42,6 +44,7 @@ router.put("/:id", async (req, res) => {
     const result = await db.Entradas.update(
       {
         titulo,
+        sub_titulo,
         contenido,
         imagen_destacada,
         autor,
@@ -69,7 +72,7 @@ router.delete("/:id", async (req, res) => {
       },
     });
     res.status(200).send(`Entrada eliminada con ID: ${id}`);
-  } catch (error) {}
+  } catch (error) { }
 });
 
 module.exports = router;
